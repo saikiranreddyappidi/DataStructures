@@ -63,9 +63,9 @@ void main(){
     scanf("%d",&t);
     //insert(start,t);
     struct node *new=newnode();
-    new->next=past->next;
-    new->data=value;
-    past->next=new;
+    new->next=start->next;
+    new->data=t;
+    start->next=new;
     printf("\nFinal list: ");		
     print(start);
     

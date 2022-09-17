@@ -20,28 +20,6 @@ void print(struct node *start){
     }
 }
 
-int insert(struct node *past,int value){
-    struct node *future=past;
-    while(future->next != NULL){
-        future=future->next;
-        if(past->data <=value && future->data > value){
-            struct node *new=newnode();
-            new->next=past->next;
-            new->data=value;
-            past->next=new;
-            break;
-        }
-        else if(future->next == NULL){
-            struct node *new=newnode();
-            new->data=value;
-            future->next=new;
-            new->next=NULL;
-            break;
-        }
-        past=past->next;
-    }
-}
-
 void main(){
     struct node *start=newnode();
     struct node *ptr1=newnode();

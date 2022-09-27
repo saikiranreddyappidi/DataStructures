@@ -54,26 +54,33 @@ void main(){
     struct node *start=newnode();
     struct node *present=newnode();
     start->next=present;
-    int i,n,value;
-    printf("Enter the size of linked list to be created initially: ");
+    int i,n,value,no_of_LL;
+    printf("Enter the no.of linked lists to be created: ");
+    scanf("%d",&no_of_LL);
+    printf("Enter the size of first linked list to be created: ");
     scanf("%d",&n);
-    printf("Enter %d numbers: ",n);
+    printf("Enter %d numbers of 1 linked list: ",n);
     for(i=0;i<n;i++){
         scanf("%d",&value);
         present->data=value;
         present->next=newnode();
         present=present->next;
     }
-    printf("\nEntered numbers : ");
-    print(start);
-    printf("\nEnter the no.of numbers to be inserted in above the above linked list: ");
-    scanf("%d",&n);
-    printf("\nEnter %d numbers that are to be inserted in the linked list: ",n);
-    for(i=0;i<n;i++){
-        scanf("%d",&value);
-        insert(start,value);
+    // printf("\nEntered numbers in first linked list: ");
+    // print(start);
+    int count=1;
+    while(count<no_of_LL){
+        count++;
+        printf("\nEnter the size of %d linked list: ",count);
+        scanf("%d",&n);
+        printf("\nEnter %d numbers of %d linked list: ",n,count);
+        for(i=0;i<n;i++){
+            scanf("%d",&value);
+            insert(start,value);
+        }
+        print(start);
     }
-    printf("\nFinal list: ");		
+    printf("\nFinal linked list: ");		
     print(start);
     
 }

@@ -5,9 +5,9 @@ int Enqueue(){
     rear++;
     if(front==-1)
         front=0;
-    if(rear==max){
+    if(rear>5){
         printf("Queue is full.");
-        return 0;
+    	return 0;
     }
     int value;
     printf("Enter the value: ");
@@ -15,27 +15,32 @@ int Enqueue(){
     queue[rear]=value;
 }
 int Dequeue(){
-    if(rear==-1 || front==max){
-        printf("Queue is empty.");
-    }
-    else
-        front++;
-    return 0;    
-}
-int display(){
-    if(rear==-1 || front==max){
+    if(rear==-1 || front>rear){
         printf("Queue is empty.");
     }
     else{
-        for(int i=front;i<=rear;i++){
-        printf("%d ",queue[i]);
+    	printf("%d is deleted from the queue.",queue[front]);
+    	front++;
+	}
+    return 0;    
+}
+int display(){
+    if(rear==-1 || front>rear){
+        printf("Queue is empty.");
     }
+    else{
+    	int i;
+    	printf("The following elements are in the Queue: ");
+        for(i=front;i<=rear;i++){
+        printf("%d ",queue[i]);
+    	}
     }
     return 0;
 }
 int main(){
     int choice=1;
     while(choice!=0){
+    	printf("\nfront=%d rear=%d",front,rear);
         printf("\n1-Enqueue\t2-Dequeue\t3-Display\t0-Exit\nEnter your choice: ");
         scanf("%d",&choice);
         if(choice==1)

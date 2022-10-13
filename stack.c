@@ -1,4 +1,3 @@
-#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 struct Stack {
@@ -26,11 +25,11 @@ int push(struct Stack* stack)
 
 {
     if (isFull(stack)){
-    	printf("Stack is full.\nPop the top value to store another element.");
+    	printf("Stack is full.");
         return 0;
     }
     int item;
-    printf("Enter an element: ");
+    printf("Enter the value: ");
     scanf("%d",&item);
     stack->array[++stack->top] = item;
     printf("%d pushed to stack\n", item);
@@ -73,22 +72,41 @@ int main()
     int size;
     scanf("%d",&size);
     struct Stack* stack = createStack(size);
-    while(1==1){
-  	printf("\n1-push\n2-pop\n3-peek\n4-display\n5-exit\nEnter your choice: ");
-  	int choice;
+    int choice=1;
+    while(choice){
+  	printf("\n0-exit\t1-push\t2-pop\t3-peek\t4-display\t5-No of elements in stack\t6-Destroy stack\nEnter your choice: ");
 	  scanf("%d",&choice);
-  	if(choice==1){
+    if(choice==0)
+        exit(2);  
+  	else if(choice==1)
   		push(stack);
-	  }
-	  else if(choice==2)
-	  pop(stack);
-	  else if(choice==3)
-	  peek(stack);
-	  else if (choice==4)
-	  display(stack);
-	  else if(choice==5)
-	  exit(2);
-	  else
+	else if(choice==2)
+        pop(stack);
+	else if(choice==3)
+	    peek(stack);
+	else if (choice==4)
+	    display(stack);
+	else if(choice==5){
+        printf("No of elements in the stack are: %d",stack->top+1);
+    }
+    else if(choice==6){
+        if (isEmpty(stack)){
+            printf("Stack is empty.");
+        }else{
+            free(stack);
+            printf("Stack destroyed.\nEnter Y to create new stack else N: ");
+            char user_choice;
+            scanf("%s",&user_choice);
+            if(user_choice=='Y' || user_choice=='y'){
+                printf("Enter the size of stack to be created: ");
+                scanf("%d",&size);
+                struct Stack* stack = createStack(size);
+            }else{
+                exit(3);
+            }
+        }
+    }
+	else
 	  printf("Enter a valid choice.");
 	  
 	}

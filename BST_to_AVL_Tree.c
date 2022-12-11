@@ -184,6 +184,44 @@ void printPreOrder(struct Node *root) {
     printPreOrder(root->right);
   }
 }
+//-----------------------------------------------------------
+int calculateLeftHeight(struct Node *node){
+	if (node == NULL)
+        return 0;
+    else{
+        int lheight = calculateLeftHeight(node->left);
+        return lheight+1;
+    }
+}
+
+void printCurrentLevelModified(struct Node* root, int level){
+    if (root == NULL)
+        return;
+    if (level == 1){
+    	int lh=calculateLeftHeight(root);
+//    	printf(" -------->%d",lh);
+    	int i;
+		for(i=0;i<2*lh;i++){
+			printf(" ");
+		}
+		printf("%d",root->key);
+    	
+	}
+        
+    else if (level > 1) {
+        printCurrentLevelModified(root->left, level - 1);
+        printCurrentLevelModified(root->right, level-1);
+        }
+}
+void printLevelOrderModified(struct Node* root){
+    int h = height(root);
+    int i;
+    for (i = 1; i <= h; i++){
+        printCurrentLevelModified(root, i);
+        printf("\n");
+    }      
+}
+//------------------------------------------------------------
 
 int main() 
 {
@@ -220,5 +258,7 @@ int main()
     root = insertNode(root, a[i]);
   printf("\nPreorder of AVL tree: ");
   printPreOrder(root);
+  printf("\n");
+  printLevelOrderModified(root);
   return 0;
 }

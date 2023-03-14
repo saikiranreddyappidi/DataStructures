@@ -332,4 +332,3 @@ void sub(int **a,int **b,int size,int **c){
     }
     subt++;
 }
-

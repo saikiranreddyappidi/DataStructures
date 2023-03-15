@@ -299,7 +299,6 @@ int main(){
         new[i] = malloc(size*sizeof(int));
     }
     multiply(a,b,size,size,new);
-
     if(tempS<size)
         size =tempS;
     for(i=0;i<size;i++){

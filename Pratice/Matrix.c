@@ -311,6 +311,7 @@ int main(){
     return 0;
 }
 
+
 void add(int **a, int **b, int size,int **c){
     int i,j;
     for(i=0;i<size;i++){
@@ -320,6 +321,7 @@ void add(int **a, int **b, int size,int **c){
     }
     addi++;
 }
+
 
 void sub(int **a,int **b,int size,int **c){
     int i,j;

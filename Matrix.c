@@ -2,11 +2,12 @@
 #include<math.h>
 #include<stdlib.h>
 
-int addi=0,subt=0,mult=0;
+int addi=0,subt=0,mult=0,mat=0;
 
 void add(int **a, int **b, int size,int **c);
 void sub(int **a, int **b, int size,int **c);
 void  multiply(int **c,int **d,int size,int size2,int **new){
+    int rec,mu;
     if(size == 1){
         new[0][0] = c[0][0] *d[0][0];
         mult++;
@@ -164,7 +165,10 @@ void  multiply(int **c,int **d,int size,int size2,int **new){
         free(temp9);
         free(temp10);
 
-
+        if(mat==2) {
+            rec=1;
+            mu=1;
+        }
         int **te1 = malloc(nsize * sizeof(int *));
         for(i=0;i<nsize;i++){
             te1[i]= malloc(nsize*sizeof(int));
@@ -197,7 +201,10 @@ void  multiply(int **c,int **d,int size,int size2,int **new){
         for(i=0;i<nsize;i++){
             te8[i]= malloc(nsize*sizeof(int));
         }
-
+        if(mat==4){
+            rec=7;
+            mu=2;
+        }
         add(m1,m7,nsize,te1);
         sub(m4,m5,nsize,te2);
         add(te1,te2,nsize,te3);    //c11
@@ -207,15 +214,19 @@ void  multiply(int **c,int **d,int size,int size2,int **new){
 
         add(m3,m6,nsize,te6);
         sub(m1,m2,nsize,te7);
-
+        if(mat==8){
+            rec=49;
+            mu=3;
+        }
         add(te6,te7,nsize,te8);//c22
-
+        addi=rec*18;
         int a=0;
         int b=0;
         int c=0;
         int d=0;
         int e=0;
         int nsize2= 2*nsize;
+        mult=pow(7,mu);
         for(i=0;i<nsize2;i++){
             for(j=0;j<nsize2;j++){
                 if(j>=0 && j<nsize && i>=0 && i<nsize){
@@ -244,14 +255,15 @@ void  multiply(int **c,int **d,int size,int size2,int **new){
         free(c11);free(c12);free(c21);
         free(c22);free(d11);free(d12);
         free(d21);free(d22);
-        mult++;
     }
 }
+
 int main(){
     int size,p,itr,itr1,i,j,nsize;
     printf("Enter Size of matrix\n");
     scanf("%d",&size);
     int tempS = size;
+    mat=size;
     if((size & size-1) != 0){
         p = log(size)/log(2);
         size = pow(2,p+1);
@@ -287,7 +299,6 @@ int main(){
         new[i] = malloc(size*sizeof(int));
     }
     multiply(a,b,size,size,new);
-
     if(tempS<size)
         size =tempS;
     for(i=0;i<size;i++){
@@ -296,9 +307,10 @@ int main(){
         }
         printf("\n");
     }
-    printf("\n%d %d %d %d",addi,subt,mult,addi+subt+mult);
+    printf("\nTotal no.of additions and subtractions: %d\nNo.of multiplications: %d\nTotal no.of arithmetic operations are: %d",addi,mult,addi+mult);
     return 0;
 }
+
 
 void add(int **a, int **b, int size,int **c){
     int i,j;
@@ -309,6 +321,7 @@ void add(int **a, int **b, int size,int **c){
     }
     addi++;
 }
+
 
 void sub(int **a,int **b,int size,int **c){
     int i,j;

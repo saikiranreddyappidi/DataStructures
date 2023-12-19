@@ -262,3 +262,55 @@ int main()
   printLevelOrderModified(root);
   return 0;
 }
+
+
+
+
+
+
+
+t = int(input())
+for _ in range(t):
+    a = input()
+    b = input()
+    q = int(input())
+    n = len(a)
+    m = len(b)
+    max_len = max(n, m)
+    
+    p = 41
+    mod = 10**9 + 7
+    pwr = [1] * (max_len)
+    for z in range(1, max_len + 1):
+        pwr[z] = (pwr[z - 1] * p) % mod
+    
+    pha = [0] * n
+    pha[0] = ord(a[0]) * p
+    for z in range(1, n):
+        pha[z] = (pha[z - 1] + (ord(a[z]) * pwr[z + 1]) % mod) % mod
+
+    phb = [0] * m
+    phb[0] = ord(b[0]) * p
+    for z in range(1, m):
+        phb[z] = (phb[z - 1] + (ord(b[z]) * pwr[z + 1]) % mod) % mod
+
+    for _ in range(q):
+        i, j, k, l = map(int, input().split())
+
+        t1 = 0 if i == 0 else pha[i - 1]
+        t2 = 0 if k == 0 else phb[k - 1]
+        ha = (pha[j] - t1 + mod) % mod
+        hb = (phb[l] - t2 + mod) % mod
+
+        d = abs(i - k)
+        if i < k:
+            ha = (ha * pwr[d]) % mod
+        else:
+            hb = (hb * pwr[d]) % mod
+
+        if ha == hb:
+            print("Yes")
+        else:
+            print("No")
+
+
